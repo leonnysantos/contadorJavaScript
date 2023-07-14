@@ -1,33 +1,37 @@
-const value = document.getElementById('value');
-const plusButton = document.getElementById('plus');
-const minusButton = document.getElementById('minus');
-const resetButton = document.getElementById('reset');
+const input = document.getElementById('value');
+const adicionar = document.getElementById('plus');
+const remover = document.getElementById('minus');
+const resetar = document.getElementById('reset');
 
-const upValue = () => {
-    value.innerHTML = count;
-};
-
-let count = 0;
+let contador = 0;
 let intervalId = 0;
 
-plusButton.addEventListener('mousedown', () => {
+const inputValue = () => {
+    input.innerHTML = contador;
+}
+
+adicionar.addEventListener('mousedown', () => {
     intervalId = setInterval(() => {
-        count += 1;
-        upValue();
+        contador++;
+        inputValue();
     }, 100)
 });
 
-minusButton.addEventListener('mousedown', () => {
+remover.addEventListener('mousedown', () => {
     intervalId = setInterval(() => {
-        count -= 1;
-        upValue();
+        contador--;
+        if (contador <= 0) {
+            contador = 0;
+        }
+        inputValue();
     }, 100)
 });
 
-resetButton.addEventListener('click', () => {
-    count = 0;
-    upValue();
+resetar.addEventListener('click', () => {
+    input.innerHTML = '0';
+    contador = 0;
+})
+
+document.addEventListener('mouseup', () => {
+    clearInterval(intervalId);
 });
-
-
-document.addEventListener('mouseup', () => clearInterval(intervalId));
